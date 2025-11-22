@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
-import { Eye, EyeOff, Loader2, Youtube, Instagram, Phone, Headphones, Cloud, MessageSquare, Video, BarChart } from "lucide-react";
+import { Eye, EyeOff, Loader2, Youtube, Instagram, Phone, Headphones, Cloud, MessageSquare, Video, BarChart, Bot, PhoneCall, Zap, Mic, Smartphone } from "lucide-react";
 import teleinLogo from "@/assets/telein-logo.png";
 
 const formSchema = z.object({
@@ -80,20 +80,84 @@ const Index = () => {
   };
 
   const products = [
-    { icon: Phone, name: "PABX IP", description: "Central telefônica inteligente" },
-    { icon: Headphones, name: "Call Center", description: "Gestão completa de atendimento" },
-    { icon: Cloud, name: "Nuvem", description: "Infraestrutura escalável" },
-    { icon: MessageSquare, name: "WhatsApp", description: "Integração e automação" },
-    { icon: Video, name: "Videoconferência", description: "Reuniões profissionais" },
-    { icon: BarChart, name: "Analytics", description: "Métricas e relatórios" },
+    { icon: Bot, name: "Agentes de IA 24/7", description: "Crie atendentes por IA que respondem clientes instantaneamente, qualificam leads e agendam reuniões", iconColor: "text-orange-500", bgColor: "bg-orange-100" },
+    { icon: PhoneCall, name: "URA Reversa", description: "Robô que liga automaticamente para sua base, qualifica interessados e transfere para seu time", iconColor: "text-blue-500", bgColor: "bg-blue-100" },
+    { icon: MessageSquare, name: "Chat Omnichannel (Chat Telein)", description: "Centralize WhatsApp e outros canais em uma única plataforma de atendimento", iconColor: "text-orange-500", bgColor: "bg-orange-100" },
+    { icon: Zap, name: "Disparo em Massa", description: "Envie milhares de mensagens personalizadas via WhatsApp usando API oficial ou convencional", iconColor: "text-blue-500", bgColor: "bg-blue-100" },
+    { icon: Mic, name: "Discador", description: "Sistema que disca automaticamente para sua base e conecta apenas chamadas atendidas ao time", iconColor: "text-orange-500", bgColor: "bg-orange-100" },
+    { icon: Smartphone, name: "Chipmassa", description: "Números virtuais descartáveis para ativar WhatsApp, Telegram e outros apps em massa", iconColor: "text-blue-500", bgColor: "bg-blue-100" },
+    { icon: Phone, name: "IPBX Inteligente", description: "PABX IP virtual com recursos avançados de telefonia em nuvem", iconColor: "text-orange-500", bgColor: "bg-orange-100" },
   ];
 
   return (
     <div className="min-h-screen bg-background px-4 py-8">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
-          {/* Login Form */}
-          <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8">
+        <div className="grid lg:grid-cols-[1fr,400px] gap-8 items-start">
+          {/* Left Section - Ecosystem, Video and Image */}
+          <div className="space-y-6">
+            {/* Products Ecosystem Section */}
+            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8">
+              <h2 className="text-2xl font-bold mb-6">
+                Recursos do Ecossistema
+              </h2>
+              <div className="space-y-4">
+                {products.map((product, index) => (
+                  <div key={index} className="flex items-start gap-4 p-4 rounded-lg border border-border hover:border-primary transition-colors">
+                    <div className={`${product.bgColor} p-3 rounded-lg flex-shrink-0`}>
+                      <product.icon className={`w-6 h-6 ${product.iconColor}`} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-sm mb-1">{product.name}</h3>
+                      <p className="text-xs text-muted-foreground">{product.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* YouTube Video Section */}
+            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8">
+              <h2 className="text-2xl font-bold mb-6">
+                Vídeo Mais Recente
+              </h2>
+              <div className="aspect-video rounded-lg overflow-hidden bg-muted">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed?listType=user_uploads&list=UCYnFC1JBxDTtFn2qUoUTs2A"
+                  title="Vídeo mais recente - Telein"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                ></iframe>
+              </div>
+              <p className="text-sm text-muted-foreground text-center mt-4">
+                Confira nosso conteúdo no{" "}
+                <a 
+                  href="https://www.youtube.com/channel/UCYnFC1JBxDTtFn2qUoUTs2A"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  YouTube
+                </a>
+              </p>
+            </div>
+
+            {/* Featured Image Section */}
+            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8">
+              <h2 className="text-2xl font-bold mb-6">
+                Destaque
+              </h2>
+              <div className="aspect-square rounded-lg overflow-hidden bg-muted flex items-center justify-center">
+                <p className="text-muted-foreground text-sm">Imagem 1024x1024</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Section - Login Form */}
+          <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8 lg:sticky lg:top-8">
             {/* Logo */}
             <div className="text-center mb-6">
               <img 
@@ -247,56 +311,6 @@ const Index = () => {
                 </a>
               </div>
             </form>
-          </div>
-
-          {/* Products Ecosystem Section */}
-          <div className="lg:col-span-1 space-y-6">
-            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8">
-              <h2 className="text-2xl font-bold mb-6 text-center">
-                Nosso Ecossistema
-              </h2>
-              <div className="grid grid-cols-2 gap-4">
-                {products.map((product, index) => (
-                  <Card key={index} className="border-border hover:border-primary transition-colors">
-                    <CardContent className="p-4 text-center">
-                      <product.icon className="w-8 h-8 mx-auto mb-2 text-primary" />
-                      <h3 className="font-semibold text-sm mb-1">{product.name}</h3>
-                      <p className="text-xs text-muted-foreground">{product.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-
-            {/* YouTube Video Section */}
-            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8">
-              <h2 className="text-2xl font-bold mb-6 text-center">
-                Vídeo Mais Recente
-              </h2>
-              <div className="aspect-video rounded-lg overflow-hidden bg-muted">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed?listType=user_uploads&list=UCYnFC1JBxDTtFn2qUoUTs2A"
-                  title="Vídeo mais recente - Telein"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                ></iframe>
-              </div>
-              <p className="text-sm text-muted-foreground text-center mt-4">
-                Confira nosso conteúdo no{" "}
-                <a 
-                  href="https://www.youtube.com/channel/UCYnFC1JBxDTtFn2qUoUTs2A"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  YouTube
-                </a>
-              </p>
-            </div>
           </div>
         </div>
       </div>
