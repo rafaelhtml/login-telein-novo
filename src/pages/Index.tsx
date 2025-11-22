@@ -93,31 +93,41 @@ const Index = () => {
     <div className="min-h-screen bg-background px-4 py-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[1fr,400px] gap-8 items-start">
-          {/* Left Section - Ecosystem, Video and Image */}
+          {/* Left Section - Featured, Ecosystem and Video */}
           <div className="space-y-6">
-            {/* Products Ecosystem Section */}
-            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8">
-              <h2 className="text-2xl font-bold mb-6">
+            {/* Featured Image Section - Black Friday Promo */}
+            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-6">
+              <h2 className="text-xl font-bold mb-4">
+                Promoção Black Friday
+              </h2>
+              <div className="aspect-square rounded-lg overflow-hidden bg-muted flex items-center justify-center">
+                <p className="text-muted-foreground text-sm">Imagem 1024x1024</p>
+              </div>
+            </div>
+
+            {/* Products Ecosystem Section - Compact */}
+            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-6">
+              <h2 className="text-lg font-bold mb-4">
                 Recursos do Ecossistema
               </h2>
-              <div className="space-y-4">
+              <div className="space-y-2">
                 {products.map((product, index) => (
-                  <div key={index} className="flex items-start gap-4 p-4 rounded-lg border border-border hover:border-primary transition-colors">
-                    <div className={`${product.bgColor} p-3 rounded-lg flex-shrink-0`}>
-                      <product.icon className={`w-6 h-6 ${product.iconColor}`} />
+                  <div key={index} className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors">
+                    <div className={`${product.bgColor} p-2 rounded-md flex-shrink-0`}>
+                      <product.icon className={`w-4 h-4 ${product.iconColor}`} />
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-sm mb-1">{product.name}</h3>
-                      <p className="text-xs text-muted-foreground">{product.description}</p>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-xs mb-0.5">{product.name}</h3>
+                      <p className="text-[10px] text-muted-foreground line-clamp-1">{product.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* YouTube Video Section */}
-            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8">
-              <h2 className="text-2xl font-bold mb-6">
+            {/* YouTube Video Section - Compact */}
+            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-6">
+              <h2 className="text-lg font-bold mb-4">
                 Vídeo Mais Recente
               </h2>
               <div className="aspect-video rounded-lg overflow-hidden bg-muted">
@@ -132,7 +142,7 @@ const Index = () => {
                   className="w-full h-full"
                 ></iframe>
               </div>
-              <p className="text-sm text-muted-foreground text-center mt-4">
+              <p className="text-xs text-muted-foreground text-center mt-3">
                 Confira nosso conteúdo no{" "}
                 <a 
                   href="https://www.youtube.com/channel/UCYnFC1JBxDTtFn2qUoUTs2A"
@@ -143,16 +153,6 @@ const Index = () => {
                   YouTube
                 </a>
               </p>
-            </div>
-
-            {/* Featured Image Section */}
-            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8">
-              <h2 className="text-2xl font-bold mb-6">
-                Destaque
-              </h2>
-              <div className="aspect-square rounded-lg overflow-hidden bg-muted flex items-center justify-center">
-                <p className="text-muted-foreground text-sm">Imagem 1024x1024</p>
-              </div>
             </div>
           </div>
 
