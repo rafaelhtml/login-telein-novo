@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { Eye, EyeOff, Loader2, Youtube, Instagram, Phone, Headphones, Cloud, MessageSquare, Video, BarChart, Bot, PhoneCall, Zap, Mic, Smartphone } from "lucide-react";
 import teleinLogo from "@/assets/telein-logo.png";
+import blackFridayPromo from "@/assets/black-friday-promo.png";
 
 const formSchema = z.object({
   email: z.string()
@@ -97,11 +98,12 @@ const Index = () => {
           <div className="space-y-6">
             {/* Featured Image Section - Black Friday Promo */}
             <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-6">
-              <h2 className="text-xl font-bold mb-4">
-                Promoção Black Friday
-              </h2>
-              <div className="aspect-square rounded-lg overflow-hidden bg-muted flex items-center justify-center">
-                <p className="text-muted-foreground text-sm">Imagem 1024x1024</p>
+              <div className="aspect-square rounded-lg overflow-hidden">
+                <img 
+                  src={blackFridayPromo} 
+                  alt="Promoção Black Friday Telein - Contrate 2 meses de URA Reversa e ganhe 30% de desconto no segundo mês" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
@@ -134,8 +136,8 @@ const Index = () => {
                 <iframe
                   width="100%"
                   height="100%"
-                  src="https://www.youtube.com/embed?listType=user_uploads&list=UCYnFC1JBxDTtFn2qUoUTs2A"
-                  title="Vídeo mais recente - Telein"
+                  src="https://www.youtube.com/embed/lCnqreVhR6M"
+                  title="Vídeo em destaque - Telein"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
