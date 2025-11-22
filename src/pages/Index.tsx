@@ -95,7 +95,7 @@ const Index = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[1fr,400px] gap-8 items-start">
           {/* Left Section - Featured, Ecosystem and Video */}
-          <div className="space-y-6">
+          <div className="space-y-6 order-2 lg:order-1">
             {/* Featured Image Section - Black Friday Promo */}
             <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-6">
               <div className="aspect-square rounded-lg overflow-hidden">
@@ -130,7 +130,7 @@ const Index = () => {
             {/* YouTube Video Section - Compact */}
             <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-6">
               <h2 className="text-lg font-bold mb-4">
-                Vídeo Mais Recente
+                Vídeo em Destaque
               </h2>
               <div className="aspect-video rounded-lg overflow-hidden bg-muted">
                 <iframe
@@ -159,7 +159,7 @@ const Index = () => {
           </div>
 
           {/* Right Section - Login Form */}
-          <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8 lg:sticky lg:top-8">
+          <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8 lg:sticky lg:top-8 order-1 lg:order-2">
             {/* Logo */}
             <div className="text-center mb-6">
               <img 
