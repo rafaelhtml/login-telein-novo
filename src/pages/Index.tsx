@@ -62,9 +62,17 @@ const Index = () => {
           senha: data.password,
           recaptcha: recaptchaResponse,
         }),
+        mode: 'cors',
+        credentials: 'include',
       });
 
+      // Verificar se a resposta é OK
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const result = await response.json();
+      console.log("Backend response:", result);
 
       // Tratar respostas baseado no tipo retornado pelo backend
       if (result.tipo === "danger" || result.tipo === "warning") {
