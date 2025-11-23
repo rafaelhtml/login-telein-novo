@@ -62,8 +62,6 @@ const Index = () => {
           senha: data.password,
           recaptcha: recaptchaResponse,
         }),
-        mode: 'cors',
-        credentials: 'include',
       });
 
       // Verificar se a resposta é OK
