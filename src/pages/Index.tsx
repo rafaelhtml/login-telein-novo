@@ -72,34 +72,57 @@ const Index = () => {
       const result = await response.json();
       console.log("Backend response:", result);
 
-      // Tratar respostas baseado no tipo retornado pelo backend
-      if (result.tipo === "danger" || result.tipo === "warning") {
-        toast({
-          variant: "destructive",
-          title: "Erro",
-          description: result.mensagem || "Erro ao fazer login.",
-        });
-        // Resetar reCAPTCHA
-        (window as any).grecaptcha?.reset();
-      } else if (result.tipo === "info") {
-        toast({
-          title: "Informação",
-          description: result.mensagem,
-        });
-        if (result.pagina) {
-          setTimeout(() => {
-            window.location.href = `https://interface.telein.com.br/${result.pagina}`;
-          }, 1000);
+      // Verificar se há página para redirecionar
+      if (result.pagina) {
+        // Mostrar toast apropriado antes de redirecionar
+        if (result.tipo === "danger" || result.tipo === "warning") {
+          if (result.mensagem) {
+            toast({
+              variant: "destructive",
+              title: "Atenção",
+              description: result.mensagem,
+            });
+          }
+        } else if (result.tipo === "info") {
+          if (result.mensagem) {
+            toast({
+              title: "Informação",
+              description: result.mensagem,
+            });
+          }
+        } else {
+          if (result.mensagem) {
+            toast({
+              title: "Sucesso!",
+              description: result.mensagem,
+            });
+          }
         }
+        
+        // Redirecionar para a página indicada
+        setTimeout(() => {
+          window.location.href = `https://interface.telein.com.br/${result.pagina}`;
+        }, 500);
       } else {
-        toast({
-          title: "Sucesso!",
-          description: result.mensagem || "Login realizado com sucesso!",
-        });
-        if (result.pagina) {
-          setTimeout(() => {
-            window.location.href = `https://interface.telein.com.br/${result.pagina}`;
-          }, 1000);
+        // Sem página para redirecionar, apenas mostrar mensagem
+        if (result.tipo === "danger" || result.tipo === "warning") {
+          toast({
+            variant: "destructive",
+            title: "Erro",
+            description: result.mensagem || "Erro ao fazer login.",
+          });
+          // Resetar reCAPTCHA
+          (window as any).grecaptcha?.reset();
+        } else if (result.tipo === "info") {
+          toast({
+            title: "Informação",
+            description: result.mensagem || "Login processado.",
+          });
+        } else {
+          toast({
+            title: "Sucesso!",
+            description: result.mensagem || "Login realizado com sucesso!",
+          });
         }
       }
     } catch (error) {
