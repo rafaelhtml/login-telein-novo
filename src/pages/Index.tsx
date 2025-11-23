@@ -15,8 +15,8 @@ import blackFridayPromo from "@/assets/black-friday-promo.png";
 const formSchema = z.object({
   email: z.string()
     .trim()
-    .email("E-mail inválido")
-    .max(255, "E-mail muito longo"),
+    .min(1, "Login é obrigatório")
+    .max(255, "Login muito longo"),
   password: z.string()
     .min(1, "Senha é obrigatória"),
 });
@@ -211,7 +211,7 @@ const Index = () => {
                 <Label htmlFor="email">E-mail ou login</Label>
                 <Input
                   id="email"
-                  type="email"
+                  type="text"
                   placeholder="E-mail ou login"
                   {...register("email")}
                   aria-invalid={errors.email ? "true" : "false"}
