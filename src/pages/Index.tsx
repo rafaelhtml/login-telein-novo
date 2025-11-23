@@ -37,44 +37,74 @@ const Index = () => {
   });
 
   const onSubmit = async (data: FormData) => {
+    // Validar reCAPTCHA
+    const recaptchaResponse = (window as any).grecaptcha?.getResponse();
+    
+    if (!recaptchaResponse) {
+      toast({
+        variant: "destructive",
+        title: "Verificação necessária",
+        description: "Por favor, selecione 'Não sou um robô'.",
+      });
+      return;
+    }
+
     setIsLoading(true);
     
     try {
-      // Aqui você implementará a lógica de login com o backend
-      const formData = new FormData();
-      formData.append("email", data.email);
-      formData.append("senha", data.password);
-      if (rememberMe) {
-        formData.append("lembrar", "1");
-      }
-      
-      const response = await fetch("https://interface.telein.com.br/s_login.php", {
+      const response = await fetch("https://interface.telein.com.br/op_access.php", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          login: data.email,
+          senha: data.password,
+          recaptcha: recaptchaResponse,
+        }),
       });
 
-      if (response.ok) {
-        toast({
-          title: "Login realizado!",
-          description: "Você será redirecionado...",
-        });
-        // Redireciona após sucesso
-        setTimeout(() => {
-          window.location.href = "https://interface.telein.com.br/";
-        }, 1000);
-      } else {
+      const result = await response.json();
+
+      // Tratar respostas baseado no tipo retornado pelo backend
+      if (result.tipo === "danger" || result.tipo === "warning") {
         toast({
           variant: "destructive",
-          title: "Erro no login",
-          description: "E-mail ou senha incorretos.",
+          title: "Erro",
+          description: result.mensagem || "Erro ao fazer login.",
         });
+        // Resetar reCAPTCHA
+        (window as any).grecaptcha?.reset();
+      } else if (result.tipo === "info") {
+        toast({
+          title: "Informação",
+          description: result.mensagem,
+        });
+        if (result.pagina) {
+          setTimeout(() => {
+            window.location.href = `https://interface.telein.com.br/${result.pagina}`;
+          }, 1000);
+        }
+      } else {
+        toast({
+          title: "Sucesso!",
+          description: result.mensagem || "Login realizado com sucesso!",
+        });
+        if (result.pagina) {
+          setTimeout(() => {
+            window.location.href = `https://interface.telein.com.br/${result.pagina}`;
+          }, 1000);
+        }
       }
     } catch (error) {
+      console.error("Login error:", error);
       toast({
         variant: "destructive",
         title: "Erro de conexão",
-        description: "Não foi possível se conectar ao servidor.",
+        description: "Erro ao conectar com o servidor. Tente novamente.",
       });
+      // Resetar reCAPTCHA
+      (window as any).grecaptcha?.reset();
     } finally {
       setIsLoading(false);
     }
@@ -233,6 +263,11 @@ const Index = () => {
                 >
                   Lembrar
                 </label>
+              </div>
+
+              {/* reCAPTCHA */}
+              <div className="flex justify-center">
+                <div className="g-recaptcha" data-sitekey="6Ld-2X0pAAAAALFJnnG5lTj_D7SeDpQPjAM1MGu0"></div>
               </div>
 
               {/* Divider */}
