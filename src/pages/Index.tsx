@@ -157,13 +157,18 @@ const Index = () => {
           <div className="space-y-6 order-2 lg:order-1">
             {/* Featured Image Section - Black Friday Promo */}
             <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-6">
-              <div className="aspect-square rounded-lg overflow-hidden">
+              <a 
+                href="https://wa.me/558134542323"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block aspect-square rounded-lg overflow-hidden hover:opacity-90 transition-opacity cursor-pointer"
+              >
                 <img 
                   src={blackFridayPromo} 
-                  alt="Promoção Black Friday Telein - Contrate 2 meses de URA Reversa e ganhe 30% de desconto no segundo mês" 
+                  alt="Promoção Black Friday Telein - Contrate 2 meses de URA Reversa e ganhe 30% de desconto no segundo mês - Clique para falar no WhatsApp" 
                   className="w-full h-full object-cover"
                 />
-              </div>
+              </a>
             </div>
 
             {/* Products Ecosystem Section - Compact */}
@@ -341,7 +346,9 @@ const Index = () => {
                 <div className="text-muted-foreground">
                   Precisa de ajuda?{" "}
                   <a 
-                    href="https://interface.telein.com.br/integra/ligueme/ligue.php?interface=bdb0d1b9e0"
+                    href="https://wa.me/558134542323"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-primary hover:underline"
                   >
                     Fale Conosco
