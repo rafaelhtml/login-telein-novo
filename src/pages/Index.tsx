@@ -150,18 +150,18 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 px-4 py-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[1fr,400px] gap-8 items-start">
           {/* Left Section - Featured, Ecosystem and Video */}
-          <div className="space-y-6 order-2 lg:order-1">
+          <div className="space-y-6 order-2 lg:order-1 animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0, animationFillMode: "forwards" }}>
             {/* Featured Image Section - Black Friday Promo */}
-            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-6">
+            <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-[var(--shadow-glass)] p-6 border border-primary/10 hover:shadow-[var(--shadow-glow)] transition-all duration-300">
               <a 
                 href="https://wa.me/558134542323"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block aspect-square rounded-lg overflow-hidden hover:opacity-90 transition-opacity cursor-pointer"
+                className="block aspect-square rounded-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300 cursor-pointer"
               >
                 <img 
                   src={blackFridayPromo} 
@@ -172,14 +172,14 @@ const Index = () => {
             </div>
 
             {/* Products Ecosystem Section - Compact */}
-            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-6">
+            <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-[var(--shadow-glass)] p-6 border border-primary/10">
               <h2 className="text-lg font-bold mb-4">
                 Recursos do Ecossistema
               </h2>
               <div className="space-y-2">
                 {products.map((product, index) => (
-                  <div key={index} className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors">
-                    <div className={`${product.bgColor} p-2 rounded-md flex-shrink-0`}>
+                  <div key={index} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
+                    <div className={`${product.bgColor} p-2 rounded-md flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
                       <product.icon className={`w-4 h-4 ${product.iconColor}`} />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -192,7 +192,7 @@ const Index = () => {
             </div>
 
             {/* YouTube Video Section - Compact */}
-            <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-6">
+            <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-[var(--shadow-glass)] p-6 border border-primary/10">
               <h2 className="text-lg font-bold mb-4">
                 Vídeo em Destaque
               </h2>
@@ -223,13 +223,13 @@ const Index = () => {
           </div>
 
           {/* Right Section - Login Form */}
-          <div className="bg-card rounded-2xl shadow-[var(--shadow-elegant)] p-8 lg:sticky lg:top-8 order-1 lg:order-2">
+          <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-[var(--shadow-glass)] p-8 lg:sticky lg:top-8 order-1 lg:order-2 border border-primary/10 animate-scale-in">
             {/* Logo */}
             <div className="text-center mb-6">
               <img 
                 src={teleinLogo} 
                 alt="Telein Logo" 
-                className="h-20 mx-auto mb-4"
+                className="h-20 mx-auto mb-4 animate-fade-in-up"
               />
               <h1 className="text-xl font-semibold text-muted-foreground">
                 Acesso ao Sistema
@@ -249,7 +249,7 @@ const Index = () => {
                   placeholder="E-mail ou login"
                   {...register("email")}
                   aria-invalid={errors.email ? "true" : "false"}
-                  className="transition-all"
+                  className="transition-all focus:shadow-[0_0_0_3px_hsl(217_91%_50%/0.1)] focus:border-primary"
                 />
                 {errors.email && (
                   <p className="text-sm text-destructive" role="alert">
@@ -267,6 +267,7 @@ const Index = () => {
                     placeholder="Password"
                     {...register("password")}
                     aria-invalid={errors.password ? "true" : "false"}
+                    className="transition-all focus:shadow-[0_0_0_3px_hsl(217_91%_50%/0.1)] focus:border-primary"
                   />
                   <button
                     type="button"
@@ -310,7 +311,7 @@ const Index = () => {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full bg-gradient-to-r from-primary via-primary to-primary bg-[length:200%_100%] hover:bg-[position:100%_0] transition-all duration-500 shadow-lg hover:shadow-[var(--shadow-glow)] hover:scale-[1.02]"
                 size="lg"
                 disabled={isLoading}
               >
@@ -361,7 +362,7 @@ const Index = () => {
                     href="https://www.youtube.com/channel/UCYnFC1JBxDTtFn2qUoUTs2A"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-125 hover:-translate-y-1"
                   >
                     <Youtube className="w-6 h-6" />
                   </a>
@@ -369,7 +370,7 @@ const Index = () => {
                     href="https://instagram.com/telein_telecom"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-accent transition-all duration-300 hover:scale-125 hover:-translate-y-1"
                   >
                     <Instagram className="w-6 h-6" />
                   </a>
