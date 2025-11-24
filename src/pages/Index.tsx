@@ -195,7 +195,7 @@ const Index = () => {
   const products = [
     { icon: Bot, name: "Agentes de IA 24/7", description: "Crie atendentes por IA que respondem clientes instantaneamente, qualificam leads e agendam reuniões", iconColor: "text-orange-500", bgColor: "bg-orange-100", url: "https://ia.telein.com.br" },
     { icon: PhoneCall, name: "URA Reversa", description: "Robô que liga automaticamente para sua base, qualifica interessados e transfere para seu time", iconColor: "text-blue-500", bgColor: "bg-blue-100", url: "https://urareversa.com.br" },
-    { icon: MessageSquare, name: "Chat Omnichannel (Chat Telein)", description: "Centralize WhatsApp e outros canais em uma única plataforma de atendimento", iconColor: "text-orange-500", bgColor: "bg-orange-100" },
+    { icon: MessageSquare, name: "Chat Omnichannel (Chat Telein)", description: "Centralize WhatsApp e outros canais em uma única plataforma de atendimento", iconColor: "text-orange-500", bgColor: "bg-orange-100", url: "https://site.telein.com.br/chat-telein" },
     { icon: Zap, name: "Disparo em Massa", description: "Envie milhares de mensagens personalizadas via WhatsApp usando API oficial ou convencional", iconColor: "text-blue-500", bgColor: "bg-blue-100" },
     { icon: Mic, name: "Discador", description: "Sistema que disca automaticamente para sua base e conecta apenas chamadas atendidas ao time", iconColor: "text-orange-500", bgColor: "bg-orange-100", url: "https://ipbxinteligente.com.br/discador-gratis/" },
     { icon: Smartphone, name: "Chipmassa", description: "Números virtuais descartáveis para ativar WhatsApp, Telegram e outros apps em massa", iconColor: "text-blue-500", bgColor: "bg-blue-100", url: "https://ipbxinteligente.com.br/chip-massa-numeros-virtuais-para-receber-sms/" },
