@@ -140,13 +140,13 @@ const Index = () => {
   };
 
   const products = [
-    { icon: Bot, name: "Agentes de IA 24/7", description: "Crie atendentes por IA que respondem clientes instantaneamente, qualificam leads e agendam reuniões", iconColor: "text-orange-500", bgColor: "bg-orange-100" },
-    { icon: PhoneCall, name: "URA Reversa", description: "Robô que liga automaticamente para sua base, qualifica interessados e transfere para seu time", iconColor: "text-blue-500", bgColor: "bg-blue-100" },
+    { icon: Bot, name: "Agentes de IA 24/7", description: "Crie atendentes por IA que respondem clientes instantaneamente, qualificam leads e agendam reuniões", iconColor: "text-orange-500", bgColor: "bg-orange-100", url: "https://ia.telein.com.br" },
+    { icon: PhoneCall, name: "URA Reversa", description: "Robô que liga automaticamente para sua base, qualifica interessados e transfere para seu time", iconColor: "text-blue-500", bgColor: "bg-blue-100", url: "https://urareversa.com.br" },
     { icon: MessageSquare, name: "Chat Omnichannel (Chat Telein)", description: "Centralize WhatsApp e outros canais em uma única plataforma de atendimento", iconColor: "text-orange-500", bgColor: "bg-orange-100" },
     { icon: Zap, name: "Disparo em Massa", description: "Envie milhares de mensagens personalizadas via WhatsApp usando API oficial ou convencional", iconColor: "text-blue-500", bgColor: "bg-blue-100" },
-    { icon: Mic, name: "Discador", description: "Sistema que disca automaticamente para sua base e conecta apenas chamadas atendidas ao time", iconColor: "text-orange-500", bgColor: "bg-orange-100" },
-    { icon: Smartphone, name: "Chipmassa", description: "Números virtuais descartáveis para ativar WhatsApp, Telegram e outros apps em massa", iconColor: "text-blue-500", bgColor: "bg-blue-100" },
-    { icon: Phone, name: "IPBX Inteligente", description: "PABX IP virtual com recursos avançados de telefonia em nuvem", iconColor: "text-orange-500", bgColor: "bg-orange-100" },
+    { icon: Mic, name: "Discador", description: "Sistema que disca automaticamente para sua base e conecta apenas chamadas atendidas ao time", iconColor: "text-orange-500", bgColor: "bg-orange-100", url: "https://ipbxinteligente.com.br/discador-gratis/" },
+    { icon: Smartphone, name: "Chipmassa", description: "Números virtuais descartáveis para ativar WhatsApp, Telegram e outros apps em massa", iconColor: "text-blue-500", bgColor: "bg-blue-100", url: "https://ipbxinteligente.com.br/chip-massa-numeros-virtuais-para-receber-sms/" },
+    { icon: Phone, name: "IPBX Inteligente", description: "PABX IP virtual com recursos avançados de telefonia em nuvem", iconColor: "text-orange-500", bgColor: "bg-orange-100", url: "https://ipbxinteligente.com.br/pabx-virtual-nuvem/" },
   ];
 
   return (
@@ -177,17 +177,39 @@ const Index = () => {
                 Recursos do Ecossistema
               </h2>
               <div className="space-y-2">
-                {products.map((product, index) => (
-                  <div key={index} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
-                    <div className={`${product.bgColor} p-2 rounded-md flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-                      <product.icon className={`w-4 h-4 ${product.iconColor}`} />
+                {products.map((product, index) => {
+                  const content = (
+                    <>
+                      <div className={`${product.bgColor} p-2 rounded-md flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                        <product.icon className={`w-4 h-4 ${product.iconColor}`} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-xs mb-0.5">{product.name}</h3>
+                        <p className="text-[10px] text-muted-foreground line-clamp-1">{product.description}</p>
+                      </div>
+                    </>
+                  );
+
+                  if (product.url) {
+                    return (
+                      <a
+                        key={index}
+                        href={product.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300 hover:scale-[1.02] cursor-pointer group"
+                      >
+                        {content}
+                      </a>
+                    );
+                  }
+
+                  return (
+                    <div key={index} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
+                      {content}
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-xs mb-0.5">{product.name}</h3>
-                      <p className="text-[10px] text-muted-foreground line-clamp-1">{product.description}</p>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -325,6 +347,17 @@ const Index = () => {
                 )}
               </Button>
 
+              {/* Register Button */}
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full border-primary/20 hover:bg-primary/5 hover:scale-[1.02] transition-all duration-300"
+                size="lg"
+                onClick={() => window.open('https://iniciar.telein.com.br/', '_blank')}
+              >
+                Cadastrar
+              </Button>
+
               {/* Divider */}
               <div className="border-t border-border" />
 
@@ -335,13 +368,6 @@ const Index = () => {
                   className="block text-primary hover:underline"
                 >
                   Esqueci minha senha
-                </a>
-                
-                <a 
-                  href="https://ipbxinteligente.com.br/"
-                  className="block text-primary hover:underline"
-                >
-                  Nosso Site
                 </a>
                 
                 <div className="text-muted-foreground">
