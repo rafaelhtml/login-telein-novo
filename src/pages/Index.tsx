@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -27,6 +27,9 @@ const Index = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [recaptchaReady, setRecaptchaReady] = useState(false);
+  const recaptchaRef = useRef<HTMLDivElement>(null);
+  const recaptchaWidgetId = useRef<number | null>(null);
 
   const {
     register,
@@ -36,9 +39,51 @@ const Index = () => {
     resolver: zodResolver(formSchema),
   });
 
+  // Renderizar reCAPTCHA quando estiver pronto
+  useEffect(() => {
+    const renderRecaptcha = () => {
+      if (
+        recaptchaRef.current &&
+        (window as any).grecaptcha &&
+        (window as any).grecaptcha.render &&
+        recaptchaWidgetId.current === null
+      ) {
+        try {
+          recaptchaWidgetId.current = (window as any).grecaptcha.render(recaptchaRef.current, {
+            sitekey: '6Ld-2X0pAAAAALFJnnG5lTj_D7SeDpQPjAM1MGu0'
+          });
+          setRecaptchaReady(true);
+        } catch (error) {
+          console.error('Erro ao renderizar reCAPTCHA:', error);
+        }
+      }
+    };
+
+    // Verificar se o grecaptcha já está disponível
+    if ((window as any).grecaptcha && (window as any).grecaptcha.render) {
+      renderRecaptcha();
+    } else {
+      // Aguardar o callback onload
+      (window as any).onRecaptchaLoad = renderRecaptcha;
+    }
+
+    return () => {
+      // Cleanup
+      if (recaptchaWidgetId.current !== null) {
+        try {
+          (window as any).grecaptcha?.reset(recaptchaWidgetId.current);
+        } catch (error) {
+          console.error('Erro ao resetar reCAPTCHA:', error);
+        }
+      }
+    };
+  }, []);
+
   const onSubmit = async (data: FormData) => {
     // Validar reCAPTCHA
-    const recaptchaResponse = (window as any).grecaptcha?.getResponse();
+    const recaptchaResponse = recaptchaWidgetId.current !== null 
+      ? (window as any).grecaptcha?.getResponse(recaptchaWidgetId.current)
+      : (window as any).grecaptcha?.getResponse();
     
     if (!recaptchaResponse) {
       toast({
@@ -112,7 +157,11 @@ const Index = () => {
             description: result.mensagem || "Erro ao fazer login.",
           });
           // Resetar reCAPTCHA
-          (window as any).grecaptcha?.reset();
+          if (recaptchaWidgetId.current !== null) {
+            (window as any).grecaptcha?.reset(recaptchaWidgetId.current);
+          } else {
+            (window as any).grecaptcha?.reset();
+          }
         } else if (result.tipo === "info") {
           toast({
             title: "Informação",
@@ -133,7 +182,11 @@ const Index = () => {
         description: "Erro ao conectar com o servidor. Tente novamente.",
       });
       // Resetar reCAPTCHA
-      (window as any).grecaptcha?.reset();
+      if (recaptchaWidgetId.current !== null) {
+        (window as any).grecaptcha?.reset(recaptchaWidgetId.current);
+      } else {
+        (window as any).grecaptcha?.reset();
+      }
     } finally {
       setIsLoading(false);
     }
@@ -324,7 +377,7 @@ const Index = () => {
 
               {/* reCAPTCHA */}
               <div className="flex justify-center">
-                <div className="g-recaptcha" data-sitekey="6Ld-2X0pAAAAALFJnnG5lTj_D7SeDpQPjAM1MGu0"></div>
+                <div ref={recaptchaRef}></div>
               </div>
 
               {/* Divider */}
