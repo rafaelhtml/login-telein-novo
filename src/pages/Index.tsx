@@ -10,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { Eye, EyeOff, Loader2, Youtube, Instagram, Phone, Headphones, Cloud, MessageSquare, Video, BarChart, Bot, PhoneCall, Zap, Mic, Smartphone } from "lucide-react";
 import teleinLogo from "@/assets/telein-logo.png";
-import blackFridayPromo from "@/assets/black-friday-promo.png";
+import agenteIaPromo from "@/assets/agente-ia-promo.png";
 
 const formSchema = z.object({
   email: z.string()
@@ -211,14 +211,14 @@ const Index = () => {
             {/* Featured Image Section - Black Friday Promo */}
             <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-[var(--shadow-glass)] p-6 border border-primary/10 hover:shadow-[var(--shadow-glow)] transition-all duration-300">
               <a 
-                href="https://wa.me/558134542323"
+                href="https://www.youtube.com/watch?v=lCnqreVhR6M"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block aspect-square rounded-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300 cursor-pointer"
               >
                 <img 
-                  src={blackFridayPromo} 
-                  alt="Promoção Black Friday Telein - Contrate 2 meses de URA Reversa e ganhe 30% de desconto no segundo mês - Clique para falar no WhatsApp" 
+                  src={agenteIaPromo} 
+                  alt="Crie seu Agente de IA e teste gratuitamente - Transforme seu atendimento com inteligência artificial personalizada - Clique para assistir" 
                   className="w-full h-full object-cover"
                 />
               </a>
