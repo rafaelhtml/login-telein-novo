@@ -9,8 +9,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
-  // Use basename apenas em produção
-  const basename = import.meta.env.PROD ? "/login" : "/";
+  const basename = "/";
   
   return (
     <QueryClientProvider client={queryClient}>
