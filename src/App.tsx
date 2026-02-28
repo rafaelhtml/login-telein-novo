@@ -9,7 +9,13 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const basename = import.meta.env.DEV ? "/" : "/interfaceCelular/login/";
+  const basename = (() => {
+    if (import.meta.env.DEV) return "/";
+    const path = window.location.pathname;
+    if (path.startsWith("/interfaceCelular/login/")) return "/interfaceCelular/login";
+    if (path.startsWith("/login/")) return "/login";
+    return "/";
+  })();
   
   return (
     <QueryClientProvider client={queryClient}>
