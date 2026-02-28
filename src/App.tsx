@@ -9,7 +9,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const basename = "/";
+  const basename = import.meta.env.DEV ? "/" : "/interfaceCelular/login/";
   
   return (
     <QueryClientProvider client={queryClient}>
