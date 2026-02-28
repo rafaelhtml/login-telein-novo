@@ -42,7 +42,7 @@ const Index = () => {
   const [config, setConfig] = useState<SiteConfig | null>(null);
 
   useEffect(() => {
-    fetch("/config.json?" + Date.now())
+    fetch(`${import.meta.env.BASE_URL}config.json?${Date.now()}`)
       .then(r => r.json())
       .then(setConfig)
       .catch(() => setConfig(null));
