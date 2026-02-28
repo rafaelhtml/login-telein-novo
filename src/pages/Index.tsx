@@ -233,6 +233,7 @@ const Index = () => {
                   src={config?.imagemDestaque?.url || agenteIaPromoFallback} 
                   alt={config?.imagemDestaque?.alt || "Promoção Telein"} 
                   className="w-full h-full object-cover"
+                  onError={(e) => { e.currentTarget.src = agenteIaPromoFallback; }}
                 />
               </a>
             </div>
