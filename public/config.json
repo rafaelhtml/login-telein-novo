@@ -1,9 +1,11 @@
 {
-  "imagemDestaque": {
-    "url": "",
-    "link": "https://www.youtube.com/watch?v=lCnqreVhR6M",
-    "alt": "Crie seu Agente de IA e teste gratuitamente"
-  },
+  "imagensDestaque": [
+    {
+      "url": "",
+      "link": "https://www.youtube.com/watch?v=lCnqreVhR6M",
+      "alt": "Crie seu Agente de IA e teste gratuitamente"
+    }
+  ],
   "videoDestaque": {
     "youtubeId": "lCnqreVhR6M"
   }

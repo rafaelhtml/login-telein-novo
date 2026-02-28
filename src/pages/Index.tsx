@@ -12,8 +12,14 @@ import { Eye, EyeOff, Loader2, Youtube, Instagram, Phone, Headphones, Cloud, Mes
 import teleinLogo from "@/assets/telein-logo.png";
 import agenteIaPromoFallback from "@/assets/agente-ia-promo.png";
 
+interface ImagemDestaque {
+  url: string;
+  link: string;
+  alt: string;
+}
+
 interface SiteConfig {
-  imagemDestaque: { url: string; link: string; alt: string };
+  imagensDestaque: ImagemDestaque[];
   videoDestaque: { youtubeId: string };
 }
 
@@ -223,19 +229,28 @@ const Index = () => {
           <div className="space-y-6 order-2 lg:order-1 animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0, animationFillMode: "forwards" }}>
             {/* Featured Image Section - Black Friday Promo */}
             <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-[var(--shadow-glass)] p-6 border border-primary/10 hover:shadow-[var(--shadow-glow)] transition-all duration-300">
-              <a 
-                href={config?.imagemDestaque?.link || "https://www.youtube.com/watch?v=lCnqreVhR6M"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block aspect-square rounded-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300 cursor-pointer"
-              >
-                <img 
-                  src={config?.imagemDestaque?.url && config.imagemDestaque.url.trim() !== '' ? config.imagemDestaque.url : agenteIaPromoFallback} 
-                  alt={config?.imagemDestaque?.alt || "Promoção Telein"} 
-                  className="w-full h-full object-cover"
-                  onError={(e) => { e.currentTarget.src = agenteIaPromoFallback; }}
-                />
-              </a>
+              {(() => {
+                const imagens = config?.imagensDestaque?.filter(img => img) || [];
+                const img = imagens.length > 0 ? imagens[Math.floor(Math.random() * imagens.length)] : null;
+                const imgUrl = img?.url && img.url.trim() !== '' ? img.url : agenteIaPromoFallback;
+                const imgLink = img?.link || "https://www.youtube.com/watch?v=lCnqreVhR6M";
+                const imgAlt = img?.alt || "Promoção Telein";
+                return (
+                  <a 
+                    href={imgLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block aspect-square rounded-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300 cursor-pointer"
+                  >
+                    <img 
+                      src={imgUrl} 
+                      alt={imgAlt} 
+                      className="w-full h-full object-cover"
+                      onError={(e) => { e.currentTarget.src = agenteIaPromoFallback; }}
+                    />
+                  </a>
+                );
+              })()}
             </div>
 
             {/* Products Ecosystem Section - Compact */}
