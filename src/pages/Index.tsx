@@ -10,7 +10,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { Eye, EyeOff, Loader2, Youtube, Instagram, Phone, Headphones, Cloud, MessageSquare, Video, BarChart, Bot, PhoneCall, Zap, Mic, Smartphone } from "lucide-react";
 import teleinLogo from "@/assets/telein-logo.png";
-import agenteIaPromo from "@/assets/agente-ia-promo.png";
+import agenteIaPromoFallback from "@/assets/agente-ia-promo.png";
+
+interface SiteConfig {
+  imagemDestaque: { url: string; link: string; alt: string };
+  videoDestaque: { youtubeId: string };
+}
 
 const formSchema = z.object({
   email: z.string()
@@ -28,6 +33,14 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [recaptchaReady, setRecaptchaReady] = useState(false);
+  const [config, setConfig] = useState<SiteConfig | null>(null);
+
+  useEffect(() => {
+    fetch("/config.json?" + Date.now())
+      .then(r => r.json())
+      .then(setConfig)
+      .catch(() => setConfig(null));
+  }, []);
   const recaptchaRef = useRef<HTMLDivElement>(null);
   const recaptchaWidgetId = useRef<number | null>(null);
 
@@ -211,14 +224,14 @@ const Index = () => {
             {/* Featured Image Section - Black Friday Promo */}
             <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-[var(--shadow-glass)] p-6 border border-primary/10 hover:shadow-[var(--shadow-glow)] transition-all duration-300">
               <a 
-                href="https://www.youtube.com/watch?v=lCnqreVhR6M"
+                href={config?.imagemDestaque?.link || "https://www.youtube.com/watch?v=lCnqreVhR6M"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block aspect-square rounded-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300 cursor-pointer"
               >
                 <img 
-                  src={agenteIaPromo} 
-                  alt="Crie seu Agente de IA e teste gratuitamente - Transforme seu atendimento com inteligência artificial personalizada - Clique para assistir" 
+                  src={config?.imagemDestaque?.url || agenteIaPromoFallback} 
+                  alt={config?.imagemDestaque?.alt || "Promoção Telein"} 
                   className="w-full h-full object-cover"
                 />
               </a>
@@ -275,7 +288,7 @@ const Index = () => {
                 <iframe
                   width="100%"
                   height="100%"
-                  src="https://www.youtube.com/embed/lCnqreVhR6M"
+                  src={`https://www.youtube.com/embed/${config?.videoDestaque?.youtubeId || "lCnqreVhR6M"}`}
                   title="Vídeo em destaque - Telein"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
