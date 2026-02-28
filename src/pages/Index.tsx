@@ -230,7 +230,7 @@ const Index = () => {
                 className="block aspect-square rounded-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300 cursor-pointer"
               >
                 <img 
-                  src={config?.imagemDestaque?.url || agenteIaPromoFallback} 
+                  src={config?.imagemDestaque?.url && config.imagemDestaque.url.trim() !== '' ? config.imagemDestaque.url : agenteIaPromoFallback} 
                   alt={config?.imagemDestaque?.alt || "Promoção Telein"} 
                   className="w-full h-full object-cover"
                   onError={(e) => { e.currentTarget.src = agenteIaPromoFallback; }}
